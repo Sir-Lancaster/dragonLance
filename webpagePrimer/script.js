@@ -8,19 +8,20 @@ document.addEventListener('DOMContentLoaded', () => {
     let startX, startY, translateX = 0, translateY = 0;
 
     if (map) {
+        // Zoom functionality
         map.addEventListener('wheel', (event) => {
             event.preventDefault();
             if (event.deltaY < 0) {
-                // Zoom in
                 scale = Math.min(scale + scaleStep, maxScale);
             } else {
-                // Zoom out
                 scale = Math.max(scale - scaleStep, minScale);
             }
             map.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
         });
 
+        // Panning functionality
         map.addEventListener('mousedown', (event) => {
+            event.preventDefault(); // Prevents default dragging behavior
             isPanning = true;
             startX = event.clientX - translateX;
             startY = event.clientY - translateY;
@@ -39,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
             map.style.cursor = 'grab';
         });
 
+        // In case the cursor leaves the map area while dragging
         map.addEventListener('mouseleave', () => {
             isPanning = false;
             map.style.cursor = 'grab';
