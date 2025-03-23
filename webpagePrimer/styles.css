@@ -1,0 +1,150 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #551919;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000; /* Ensure the navbar is above other content */
+}
+
+.navbar a {
+    color: white;
+    padding: 14px 20px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.navbar a:hover {
+    background-color: rgb(128, 110, 11);
+    color: black;
+}
+
+.Nav_Text {
+    font-size: 40px;
+    color: gold;
+    margin: 0;
+}
+
+hr {
+    margin: 0;
+    border: 3px solid #cf2626;
+}
+
+/* Home Page Rules */
+.contentHome {
+    padding: 20px;
+    padding-top: 60px;
+    text-align: left;
+}
+
+.homeImage {
+    margin: 0 auto; /* Center the .homeImage container itself */
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Ensure children are stacked vertically */
+}
+
+/* History Page Rules */
+
+.contentHistory {
+    padding: 20px;
+    padding-top: 60px;
+    text-align: left;
+}
+
+.Takhisis {
+    width: 50%;
+    height: 50%;
+    margin: 0 auto; /* Center the .Takhisis container itself */
+    object-fit: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Ensure children are stacked vertically */
+}
+
+.Takhisis h3 {
+    margin: 0; /* Remove default margin */
+    text-align: center; /* Center text within the h3 element */
+    font-size: 15px;
+    padding-top: 15px;
+}
+
+.Cataclysm {
+    padding-top: 20px;
+    width: 60%;
+    height: 60%;
+    margin: 0 auto; /* Center the .Cataclysm container itself */
+    object-fit: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Ensure children are stacked vertically */
+}
+
+.SotDQ {
+    padding-top: 20px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto; /* Center the .SotDQ container itself */
+    object-fit: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Ensure children are stacked vertically */
+}
+
+/* Map Page Rules */
+.Map {
+    padding: 20px;
+    size: fit-content;
+    margin: 0 auto;
+    overflow: hidden; /* Hide overflow to prevent scrollbars */
+    position: relative;
+}
+
+.zoomable-map {
+    width: 100%;
+    height: auto;
+    transition: transform 0.25s ease; /* Smooth zoom transition */
+    transform-origin: center center; /* Zoom from the center */
+    cursor: grab; /* Change cursor to grab while dragging */
+}
+
+/* Character Page Rules */
+.contentCharacterCreation {
+    padding: 20px;
+    padding-top: 60px;
+    text-align: left;
+}
+
+.table1, .calanderTable{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    padding: 10px;
+}
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    color: rgb(0, 0, 0)
+}
+
+tr:nth-child(even) {
+    background-color: #5519196c;
+}
