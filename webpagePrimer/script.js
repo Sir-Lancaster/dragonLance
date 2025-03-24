@@ -15,18 +15,34 @@ document.addEventListener('DOMContentLoaded', () => {
         const mapHeight = rect.height;
         const containerWidth = window.innerWidth;
         const containerHeight = window.innerHeight;
-        
-        // Change boundaries so the map can be dragged further right
-        // Maximum translateX moves the map so its left edge is at containerWidth/2
-        // Minimum translateX moves the map so its right edge is at containerWidth/2
-        translateX = Math.min(Math.max(translateX, containerWidth/2 - mapWidth), containerWidth/2);
-        translateY = Math.min(Math.max(translateY, containerHeight - mapHeight), containerHeight/1.75);
+
+        // Constrain translation
+        translateX = Math.min(Math.max(translateX, containerWidth / 2 - mapWidth), containerWidth / 2);
+        translateY = Math.min(Math.max(translateY, containerHeight - mapHeight), containerHeight / 1.75);
     };
-    
 
     const updateTransform = () => {
         map.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
     };
+
+    // Re-centering the map on initial load for smaller screens
+    const recenterMapOnLoad = () => {
+        const rect = map.getBoundingClientRect();
+        const containerWidth = window.innerWidth;
+        const containerHeight = window.innerHeight;
+
+        // Center the map
+        translateX = (containerWidth - rect.width) / 2;
+        translateY = (containerHeight - rect.height) / 2;
+
+        updateTransform();
+    };
+
+    window.addEventListener('load', () => {
+        if (window.innerWidth < 768) {
+            recenterMapOnLoad();
+        }
+    });
 
     if (map) {
         // Zoom functionality
@@ -42,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Panning functionality
         map.addEventListener('mousedown', (event) => {
-            event.preventDefault(); // Prevents default dragging behavior
+            event.preventDefault();
             isPanning = true;
             startX = event.clientX - translateX;
             startY = event.clientY - translateY;
@@ -64,7 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
             map.classList.remove('panning');
         });
 
-        // In case the cursor leaves the map area while dragging
         map.addEventListener('mouseleave', () => {
             isPanning = false;
             map.style.cursor = 'grab';
@@ -84,7 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Touch move for mobile
         map.addEventListener('touchmove', (event) => {
             if (!isPanning || event.touches.length !== 1) return;
             const touch = event.touches[0];
@@ -92,10 +106,9 @@ document.addEventListener('DOMContentLoaded', () => {
             translateY = touch.clientY - startY;
             constrainTranslate();
             updateTransform();
-            event.preventDefault(); // Prevents scrolling
+            event.preventDefault();
         }, { passive: false });
 
-        // Touch end for mobile
         map.addEventListener('touchend', () => {
             isPanning = false;
             map.classList.remove('panning');
@@ -109,8 +122,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (event.touches.length === 2) {
                 const touch1 = event.touches[0];
                 const touch2 = event.touches[1];
-
-                const currentDistance = Math.hypot(touch2.clientX - touch1.clientX, touch2.clientY - touch1.clientY);
+                const currentDistance = Math.hypot(
+                    touch2.clientX - touch1.clientX,
+                    touch2.clientY - touch1.clientY
+                );
 
                 if (initialDistance === 0) {
                     initialDistance = currentDistance;
@@ -121,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     updateTransform();
                 }
 
-                event.preventDefault(); // Prevents scrolling
+                event.preventDefault();
             }
         }, { passive: false });
 
@@ -169,13 +184,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Hamburger menu for the navbar on smaller screens.
-    function toggleMenu() {
+    // Hamburger menu for smaller screens
+    const toggleMenu = () => {
         const navbar = document.querySelector('.navbar');
         navbar.classList.toggle('active');
-    }
+    };
 
-    // Ensure the menu icon calls the toggleMenu function
     const menuIcon = document.querySelector('.menu-icon');
     if (menuIcon) {
         menuIcon.addEventListener('click', toggleMenu);
