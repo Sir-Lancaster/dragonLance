@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Maximum translateX moves the map so its left edge is at containerWidth/2
         // Minimum translateX moves the map so its right edge is at containerWidth/2
         translateX = Math.min(Math.max(translateX, containerWidth/2 - mapWidth), containerWidth/2);
-        translateY = Math.min(Math.max(translateY, containerHeight - mapHeight), 0);
+        translateY = Math.min(Math.max(translateY, containerHeight - mapHeight), containerHeight/1.75);
     };
     
 
