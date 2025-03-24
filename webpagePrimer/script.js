@@ -169,4 +169,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const navbar = document.querySelector('.navbar');
         navbar.classList.toggle('active');
     }
+
+    // Ensure the menu icon calls the toggleMenu function
+    const menuIcon = document.querySelector('.menu-icon');
+    if (menuIcon) {
+        menuIcon.addEventListener('click', toggleMenu);
+    }
 });
