@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let scale = 1;
     const scaleStep = 0.1;
     const maxScalePC = 3;
-    const maxScaleMobile = 7;
+    const maxScaleMobile = 7.5;
     const minScale = 1;
     let isPanning = false;
     let startX, startY, translateX = 0, translateY = 0;
