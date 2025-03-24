@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
             startX = event.clientX - translateX;
             startY = event.clientY - translateY;
             map.style.cursor = 'grabbing';
+            map.classList.add('panning');
         });
 
         document.addEventListener('mousemove', (event) => {
@@ -60,12 +61,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('mouseup', () => {
             isPanning = false;
             map.style.cursor = 'grab';
+            map.classList.remove('panning');
         });
 
         // In case the cursor leaves the map area while dragging
         map.addEventListener('mouseleave', () => {
             isPanning = false;
             map.style.cursor = 'grab';
+            map.classList.remove('panning');
         });
 
         map.style.cursor = 'grab';
@@ -77,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const touch = event.touches[0];
                 startX = touch.clientX - translateX;
                 startY = touch.clientY - translateY;
+                map.classList.add('panning');
             }
         });
 
@@ -94,6 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Touch end for mobile
         map.addEventListener('touchend', () => {
             isPanning = false;
+            map.classList.remove('panning');
         });
 
         // Pinch zoom functionality

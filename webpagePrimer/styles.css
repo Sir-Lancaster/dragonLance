@@ -197,6 +197,10 @@ hr {
     user-drag: none; /* Ignore the warning message since this is a vendor specific property and not something included in the CSS Documentation. */
 }
 
+.zoomable-map.panning {
+    transition: none; /* Disable transition during panning for immediate response */
+}
+
 /* Character Page Rules */
 .contentCharacterCreation {
     padding: 20px;
