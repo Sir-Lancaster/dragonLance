@@ -72,6 +72,36 @@ document.addEventListener('DOMContentLoaded', () => {
         map.addEventListener('touchend', () => {
             isPanning = false;
         });
+
+        // Pinch zoom functionality
+        let initialDistance = 0;
+        let initialScale = scale;
+
+        map.addEventListener('touchmove', (event) => {
+            if (event.touches.length === 2) {
+                const touch1 = event.touches[0];
+                const touch2 = event.touches[1];
+
+                const currentDistance = Math.hypot(touch2.clientX - touch1.clientX, touch2.clientY - touch1.clientY);
+
+                if (initialDistance === 0) {
+                    initialDistance = currentDistance;
+                    initialScale = scale;
+                } else {
+                    const scaleChange = currentDistance / initialDistance;
+                    scale = Math.min(Math.max(initialScale * scaleChange, minScale), maxScale);
+                    map.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
+                }
+
+                event.preventDefault(); // Prevents scrolling
+            }
+        }, { passive: false });
+
+        map.addEventListener('touchend', (event) => {
+            if (event.touches.length < 2) {
+                initialDistance = 0;
+            }
+        });
     }
 
     // Ashes animation
