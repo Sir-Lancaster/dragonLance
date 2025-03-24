@@ -163,6 +163,11 @@ hr {
     transition: transform 0.25s ease; /* Smooth zoom transition */
     transform-origin: center center; /* Zoom from the center */
     cursor: grab; /* Change cursor to grab while dragging */
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none; /* Ignore the warning message since this is a vendor specific property and not something included in the CSS Documentation. */
 }
 
 /* Character Page Rules */
