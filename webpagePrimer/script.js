@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const map = document.querySelector('.zoomable-map');
     let scale = 1;
     const scaleStep = 0.1;
-    const maxScale = 3;
+    const maxScalePC = 3;
+    const maxScaleMobile = 5;
     const minScale = 1;
     let isPanning = false;
     let startX, startY, translateX = 0, translateY = 0;
@@ -12,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         map.addEventListener('wheel', (event) => {
             event.preventDefault();
             if (event.deltaY < 0) {
-                scale = Math.min(scale + scaleStep, maxScale);
+                scale = Math.min(scale + scaleStep, maxScalePC);
             } else {
                 scale = Math.max(scale - scaleStep, minScale);
             }
@@ -89,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     initialScale = scale;
                 } else {
                     const scaleChange = currentDistance / initialDistance;
-                    scale = Math.min(Math.max(initialScale * scaleChange, minScale), maxScale);
+                    scale = Math.min(Math.max(initialScale * scaleChange, minScale), maxScaleMobile);
                     map.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
                 }
 
