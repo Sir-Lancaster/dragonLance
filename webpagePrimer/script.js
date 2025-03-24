@@ -163,4 +163,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Hamburger menu for the navbar on smaller screens.
+    function toggleMenu() {
+        const navbar = document.querySelector('.navbar');
+        navbar.classList.toggle('active');
+    }
 });
