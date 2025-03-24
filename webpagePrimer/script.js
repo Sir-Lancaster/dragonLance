@@ -47,6 +47,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         map.style.cursor = 'grab';
+
+        // Touch start for mobile
+        map.addEventListener('touchstart', (event) => {
+            if (event.touches.length === 1) {
+                isPanning = true;
+                const touch = event.touches[0];
+                startX = touch.clientX - translateX;
+                startY = touch.clientY - translateY;
+            }
+        });
+
+        // Touch move for mobile
+        map.addEventListener('touchmove', (event) => {
+            if (!isPanning || event.touches.length !== 1) return;
+            const touch = event.touches[0];
+            translateX = touch.clientX - startX;
+            translateY = touch.clientY - startY;
+            map.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
+            event.preventDefault(); // Prevents scrolling
+        }, { passive: false });
+
+        // Touch end for mobile
+        map.addEventListener('touchend', () => {
+            isPanning = false;
+        });
     }
 
     // Ashes animation
@@ -60,33 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
         ash.style.animationDuration = `${Math.random() * 5 + 5}s`;
         ash.style.animationDelay = `${Math.random() * 5}s`;
         ashesContainer.appendChild(ash);
-    }
-
-    if (map) {
-        // Touch start for mobile
-        map.addEventListener('touchstart', (event) => {
-            if (event.touches.length === 1) {
-                isPanning = true;
-                const touch = event.touches[0];
-                startX = touch.clientX - translateX;
-                startY = touch.clientY - translateY;
-            }
-        });
-        
-        // Touch move for mobile
-        map.addEventListener('touchmove', (event) => {
-            if (!isPanning || event.touches.length !== 1) return;
-            const touch = event.touches[0];
-            translateX = touch.clientX - startX;
-            translateY = touch.clientY - startY;
-            map.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
-            event.preventDefault(); // Prevents scrolling
-        }, { passive: false });
-        
-        // Touch end for mobile
-        map.addEventListener('touchend', () => {
-            isPanning = false;
-        });
     }
 
     // Modal functionality
