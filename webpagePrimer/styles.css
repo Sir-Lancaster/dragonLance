@@ -151,10 +151,11 @@ hr {
 /* Map Page Rules */
 .Map {
     padding: 20px;
-    size: fit-content;
     margin: 0 auto;
     overflow: hidden; /* Hide overflow to prevent scrollbars */
     position: relative;
+    width: 100%;
+    height: 100vh; /* Make the map container take the full viewport height */
 }
 
 .zoomable-map {
