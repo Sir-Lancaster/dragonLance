@@ -7,6 +7,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const minScale = 1;
     let isPanning = false;
     let startX, startY, translateX = 0, translateY = 0;
+    let lastTranslateX = 0, lastTranslateY = 0;
+
+    const constrainTranslate = () => {
+        const rect = map.getBoundingClientRect();
+        const mapWidth = rect.width;
+        const mapHeight = rect.height;
+        const containerWidth = window.innerWidth;
+        const containerHeight = window.innerHeight;
+
+        translateX = Math.min(Math.max(translateX, containerWidth - mapWidth), 0);
+        translateY = Math.min(Math.max(translateY, containerHeight - mapHeight), 0);
+    };
+
+    const updateTransform = () => {
+        map.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
+    };
 
     if (map) {
         // Zoom functionality
@@ -17,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 scale = Math.max(scale - scaleStep, minScale);
             }
-            map.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
+            updateTransform();
         });
 
         // Panning functionality
@@ -33,7 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!isPanning) return;
             translateX = event.clientX - startX;
             translateY = event.clientY - startY;
-            map.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
+            constrainTranslate();
+            updateTransform();
         });
 
         document.addEventListener('mouseup', () => {
@@ -65,7 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const touch = event.touches[0];
             translateX = touch.clientX - startX;
             translateY = touch.clientY - startY;
-            map.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
+            constrainTranslate();
+            updateTransform();
             event.preventDefault(); // Prevents scrolling
         }, { passive: false });
 
@@ -91,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     const scaleChange = currentDistance / initialDistance;
                     scale = Math.min(Math.max(initialScale * scaleChange, minScale), maxScaleMobile);
-                    map.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
+                    updateTransform();
                 }
 
                 event.preventDefault(); // Prevents scrolling
