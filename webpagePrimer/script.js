@@ -15,10 +15,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const mapHeight = rect.height;
         const containerWidth = window.innerWidth;
         const containerHeight = window.innerHeight;
-
-        translateX = Math.min(Math.max(translateX, containerWidth - mapWidth), 0);
+        
+        // Change boundaries so the map can be dragged further right
+        // Maximum translateX moves the map so its left edge is at containerWidth/2
+        // Minimum translateX moves the map so its right edge is at containerWidth/2
+        translateX = Math.min(Math.max(translateX, containerWidth/2 - mapWidth), containerWidth/2);
         translateY = Math.min(Math.max(translateY, containerHeight - mapHeight), 0);
     };
+    
 
     const updateTransform = () => {
         map.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
