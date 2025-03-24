@@ -62,51 +62,54 @@ document.addEventListener('DOMContentLoaded', () => {
         ashesContainer.appendChild(ash);
     }
 
-    // Touch start for mobile
-    map.addEventListener('touchstart', (event) => {
-        if (event.touches.length === 1) {
-            isPanning = true;
+    if (map) {
+        // Touch start for mobile
+        map.addEventListener('touchstart', (event) => {
+            if (event.touches.length === 1) {
+                isPanning = true;
+                const touch = event.touches[0];
+                startX = touch.clientX - translateX;
+                startY = touch.clientY - translateY;
+            }
+        });
+        
+        // Touch move for mobile
+        map.addEventListener('touchmove', (event) => {
+            if (!isPanning || event.touches.length !== 1) return;
             const touch = event.touches[0];
-            startX = touch.clientX - translateX;
-            startY = touch.clientY - translateY;
-        }
-    });
-    
-    // Touch move for mobile
-    map.addEventListener('touchmove', (event) => {
-        if (!isPanning || event.touches.length !== 1) return;
-        const touch = event.touches[0];
-        translateX = touch.clientX - startX;
-        translateY = touch.clientY - startY;
-        map.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
-        event.preventDefault(); // Prevents scrolling
-    }, { passive: false });
-    
-    // Touch end for mobile
-    map.addEventListener('touchend', () => {
-        isPanning = false;
-    });
+            translateX = touch.clientX - startX;
+            translateY = touch.clientY - startY;
+            map.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
+            event.preventDefault(); // Prevents scrolling
+        }, { passive: false });
+        
+        // Touch end for mobile
+        map.addEventListener('touchend', () => {
+            isPanning = false;
+        });
+    }
 
     // Modal functionality
     const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('modalImage');
     const closeBtn = document.getElementsByClassName('close')[0];
 
-    document.querySelectorAll('img').forEach(img => {
-        img.addEventListener('click', () => {
-            modal.style.display = 'block';
-            modalImg.src = img.src;
+    if (modal && modalImg && closeBtn) {
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('click', () => {
+                modal.style.display = 'block';
+                modalImg.src = img.src;
+            });
         });
-    });
 
-    closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
-
-    window.addEventListener('click', (event) => {
-        if (event.target === modal) {
+        closeBtn.addEventListener('click', () => {
             modal.style.display = 'none';
-        }
-    });
-  
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    }
 });
