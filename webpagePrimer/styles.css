@@ -47,6 +47,10 @@ hr {
     border: 3px solid #cf2626;
 }
 
+.subsections {
+    border: 1px solid #cf2626;
+}
+
 /* Responsive navbar */
 @media (max-width: 768px) {
     .navbar {
@@ -236,6 +240,37 @@ tr:nth-child(even) {
     background-color: #5519196c;
 }
 
+/* Gods Page Rules */
+.contentGods {
+    padding: 20px;
+    padding-top: 70px;
+    text-align: left;
+    background-color: rgba(255, 255, 255, 0.85); /* Light, transparent background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.godsImage {
+    margin: 0 auto; /* Center the .godsImage container itself */
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Ensure children are stacked vertically */
+}
+
+.Symbols {
+   width: 10%;
+   height: 10%;
+   align-content: left;
+}
+
+.godDescription {
+    text-align: left;
+    max-width: 50%;
+    margin: 0 auto;
+}
 /* Modal Styles */
 .modal {
     display: none;
