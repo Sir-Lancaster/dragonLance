@@ -111,8 +111,8 @@ hr {
 
 .ash {
     position: absolute;
-    width: 10px;
-    height: 10px;
+    width: 5px;
+    height: 5px;
     background: radial-gradient(circle, rgb(48, 46, 46) 0%, rgba(255,140,0,1) 50%, rgba(255,215,0,0.8) 100%);
     opacity: 0.8;
     border-radius: 50%;
