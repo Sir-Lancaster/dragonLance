@@ -240,6 +240,19 @@ tr:nth-child(even) {
     background-color: #5519196c;
 }
 
+.float-image {
+    float: left; /* Position the image on the left side */
+    margin: 10px 20px 10px 0; /* Add some spacing around the image */
+    width: 200px; /* Set the width of the image */
+    height: auto; /* Maintain the aspect ratio */
+    border: 2px solid #551919; /* Optional: Add a border to the image */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Optional: Add a shadow for styling */
+}
+
+.image-text-wrap p {
+    text-align: justify; /* Optional: Justify the text for better alignment */
+}
+
 /* Gods Page Rules */
 .contentGods {
     padding: 20px;
