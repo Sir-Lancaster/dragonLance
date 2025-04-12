@@ -147,17 +147,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Ashes animation
-    const ashesContainer = document.getElementById('ashes-container');
-    const numberOfAshes = 100;
+    // Check if the current page is the one where the ash animation should run
+    const isHomePage = document.getElementById('homePage');
 
-    for (let i = 0; i < numberOfAshes; i++) {
-        const ash = document.createElement('div');
-        ash.classList.add('ash');
-        ash.style.left = `${Math.random() * 100}vw`;
-        ash.style.animationDuration = `${Math.random() * 5 + 5}s`;
-        ash.style.animationDelay = `${Math.random() * 5}s`;
-        ashesContainer.appendChild(ash);
+    if (isHomePage) {
+        // Ashes animation
+        const ashesContainer = document.getElementById('ashes-container');
+        const numberOfAshes = 100;
+
+        for (let i = 0; i < numberOfAshes; i++) {
+            const ash = document.createElement('div');
+            ash.classList.add('ash');
+            ash.style.left = `${Math.random() * 100}vw`;
+            ash.style.animationDuration = `${Math.random() * 5 + 5}s`;
+            ash.style.animationDelay = `${Math.random() * 5}s`;
+            ashesContainer.appendChild(ash);
+        }
     }
 
     // Modal functionality
