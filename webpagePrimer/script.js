@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateTransform();
     };
 
+    // Run the recenterMapOnLoad function only once on page load
     window.addEventListener('load', () => {
         if (window.innerWidth < 768) {
             recenterMapOnLoad();
@@ -93,8 +94,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (event.touches.length === 1) {
                 isPanning = true;
                 const touch = event.touches[0];
-                startX = touch.clientX - translateX;
-                startY = touch.clientY - translateY;
+                startX = touch.clientX - (translateX/2);
+                startY = touch.clientY - (translateY/2);
                 map.classList.add('panning');
             }
         });
